@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // Keep the address ending in "/" so the relative paths below resolve inside this folder.
+  if (!/(\/|\.html)$/.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);
+</script>
+<title>CE 2450 Statics | Coding with Koda</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📐</text></svg>">
+<link rel="stylesheet" href="../viewer/viewer.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<header>
+  <a class="brand" href="../">Coding with Koda</a>
+  <span class="crumb-sep" aria-hidden="true">/</span>
+  <h1>CE 2450 Statics</h1>
+  <span class="sub">Problems you can turn over in your hands</span>
+  <div class="spacer"></div>
+  <button id="toggle-panel" title="Hide or show the side panel">Panel</button>
+</header>
+<nav id="sidebar">
+  <select id="problem-select" aria-label="Choose a problem"></select>
+  <div id="problem-list"></div>
+</nav>
+<main id="viewport"><div id="loading">Loading the 3D viewer…</div></main>
+<aside id="panel"></aside>
+
+<script src="problems.js"></script>
+<script src="../viewer/engine.js"></script>
+<script type="module">
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+  const loading = document.getElementById('loading');
+  try {
+    window.StaticsApp.start({ THREE, OrbitControls, CSS2DRenderer, CSS2DObject });
+    loading.remove();
+  } catch (e) {
+    loading.textContent = 'The viewer could not start: ' + e.message;
+    console.error(e);
+  }
+</script>
+<noscript>This page needs JavaScript and an internet connection (it loads three.js from a CDN).</noscript>
+</body>
+</html>

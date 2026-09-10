@@ -1,5 +1,5 @@
 /* ============================================================================
-   Statics in 3D  -  problem catalogue
+   CE 2450 Statics  -  problem catalogue
    ----------------------------------------------------------------------------
    Every problem is one object in the PROBLEMS array. The viewer never shows
    answers: it draws the givens, and lets students rotate, toggle and vary them.
@@ -31,11 +31,11 @@ const fmt = (v) => String(Math.round(v * 100) / 100).replace('-', '−');
 window.PROBLEMS = [
 
   /* ===================================================================== */
-  /*  CE 2450 Recitation, Week 3                                            */
+  /*  Recitation, Week 3                                                    */
   /* ===================================================================== */
   {
     id: 'w3-p1',
-    group: 'CE 2450 Recitation, Week 3',
+    group: 'Recitation, Week 3',
     title: 'Problem 1: three forces at a bracket',
     source: 'Recitation Week 3 problem set (adapted from a previous CE 2450 exam)',
     view: '2d', extent: 1.4, center: [0.1, 0.2, 0],
@@ -72,7 +72,7 @@ window.PROBLEMS = [
 
   {
     id: 'w3-p2',
-    group: 'CE 2450 Recitation, Week 3',
+    group: 'Recitation, Week 3',
     title: 'Problem 2: three forces in space',
     source: 'Recitation Week 3 problem set (adapted from a previous CE 2450 exam)',
     view: '3d', extent: 1.3, center: [0, 0, 0.2],
@@ -131,7 +131,7 @@ window.PROBLEMS = [
 
   {
     id: 'w3-ap',
-    group: 'CE 2450 Recitation, Week 3',
+    group: 'Recitation, Week 3',
     title: 'Additional practice: build F from its components',
     source: 'Recitation Week 3 additional practice',
     view: '3d', extent: 1.4, center: [-0.2, 0.4, 0.3],

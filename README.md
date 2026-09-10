@@ -1,81 +1,92 @@
-# Coding with Koda: Statics in 3D
+# Coding with Koda
 
-A small website that shows CE 2450 statics problems as interactive 3D figures.
-Students can rotate each figure, look straight down any axis, switch off
-perspective, turn on the rectangular components of each force, step through a
-vector construction, change the given values, and switch between the whole
-structure and the free-body diagram of a particle. The site draws the givens
-only. It never shows an answer.
+Interactive figures for engineering courses. Each course has its own page,
+and each page draws the course's problems as 3D scenes that students can
+rotate, take apart, and change. The pages show the givens only. They never
+show an answer.
 
-Everything is static HTML and JavaScript. There is no build step, no
-framework and no server-side code. Three.js is loaded from a CDN, so the page
-needs an internet connection the first time it opens.
+The first course page is CE 2450 Statics: force vectors and equilibrium of a
+particle, with problems from the Fall 2026 recitations, the Mastering
+Engineering homework, and the Chapter 3 notebook.
 
-## Files
+Everything is static HTML and JavaScript. There is no build step, no framework
+and no server-side code. Three.js comes from a CDN, so a page needs an
+internet connection the first time it opens.
 
-| File          | What it is                                                   |
-|---------------|--------------------------------------------------------------|
-| `index.html`  | Page shell, styles, and the three.js loader                  |
-| `engine.js`   | The viewer. Turns a problem description into a 3D scene      |
-| `problems.js` | The problems. This is the file you edit to add or change one |
-| `README.md`   | This file                                                    |
+## Layout
+
+| Path                  | What it is                                                     |
+|-----------------------|----------------------------------------------------------------|
+| `index.html`          | Home page: the site name and a card for each course            |
+| `ce-2450/index.html`  | The CE 2450 Statics page                                       |
+| `ce-2450/problems.js` | The CE 2450 problems. Edit this to add or change a problem     |
+| `viewer/engine.js`    | The shared 3D viewer. Turns a problem description into a scene |
+| `viewer/viewer.css`   | Shared styles for every course page                            |
+| `netlify.toml`        | Tells Netlify to publish the folder as it is                   |
 
 ## How we work on it together
 
-The code lives in the GitHub repository `olivercrocco/coding-with-koda`. The
-Netlify site is connected to that repository, so every change saved to the
-`main` branch is live at the public address within about a minute. Nobody has
-to upload anything by hand.
+The code lives in the GitHub repository `olivercrocco/coding-with-koda`, and
+the Netlify project `coding-with-koda` publishes it at
+`https://coding-with-koda.netlify.app`. Every change saved to the `main`
+branch is live about a minute later. Nobody uploads anything by hand.
 
-To add or change a problem without installing anything: open `problems.js` on
-GitHub, click the pencil icon, edit, and choose "Commit changes". Netlify
-rebuilds on its own. To work locally instead, clone the repository, edit, and
-run the local server below to check the result before committing.
+To add or change a problem without installing anything, open
+`ce-2450/problems.js` on GitHub, click the pencil icon, make the edit, and
+choose "Commit changes". To work on your own computer instead, clone the
+repository, edit, and check the result with the local server below before
+committing.
 
-If a change should be reviewed first, create a branch and open a pull request.
-Netlify attaches a preview link to every pull request, so the new problem can
-be checked in the browser before it goes live.
+When a change should be reviewed first, commit it to a new branch and open a
+pull request. Netlify attaches a preview link to every pull request, so the
+new problem can be tried in the browser before it goes live.
 
-## Running it
+## Running it locally
 
-Open `index.html` in a browser. Double-clicking the file works in Chrome,
-Edge and Safari because the three.js modules come from a CDN. If a browser
-blocks it, serve the folder instead:
+From the repository folder:
 
 ```bash
-cd "statics-3d" && python3 -m http.server 8765
+python3 -m http.server 8765
 ```
 
-and open `http://localhost:8765`.
+Then open `http://localhost:8765`. Use the server rather than double-clicking
+an HTML file, since browsers restrict pages opened straight from disk.
 
-## Putting it online for free (no domain purchase)
+## Adding a course
 
-Any static host works. Two easy routes:
+1. Copy the `ce-2450` folder and name the copy after the new course code.
+2. In the copy's `index.html`, change the `<title>` and the `<h1>`.
+3. Replace the problems in the copy's `problems.js`.
+4. Add a card for the course to the home page, the top-level `index.html`.
 
-1. GitHub Pages. Create a repository, upload the four files, then in
-   Settings, Pages, choose "Deploy from a branch" and the main branch. The
-   site appears at `https://<username>.github.io/<repository>/`.
-2. Netlify Drop. Go to `https://app.netlify.com/drop` and drag the folder
-   onto the page. You get a `https://<something>.netlify.app` address at once.
+The course pages share `viewer/engine.js` and `viewer/viewer.css`, so an
+improvement to the viewer reaches every course at once.
 
-Add `<meta name="robots" content="noindex">` (already in `index.html`) if the
-site should stay out of search engines. Sharing the link with classmates is
-then enough.
+## Hosting
 
-Before posting problems publicly, check with the professor. The recitation
-problems are the instructor's, and the homework figures come from Hibbeler's
-textbook through Mastering Engineering. This site redraws the geometry rather
-than copying the book's artwork, but the problem statements are still theirs.
+One-time setup in the Netlify dashboard: open the project `coding-with-koda`,
+go to Site configuration, Build and deploy, Continuous deployment, and choose
+Link repository, GitHub, and this repository. Leave the build command empty;
+`netlify.toml` already sets the publish directory.
+
+Every page carries `<meta name="robots" content="noindex">`, which keeps the
+site out of search engines while still letting anyone with the link open it.
+
+Before sharing widely, check with the professor. The recitation problems are
+the instructor's, and the homework problems come from Hibbeler's textbook
+through Mastering Engineering. The site redraws the geometry rather than
+copying the book's artwork, but the problem statements are still theirs.
 
 ## Adding a problem
 
-Every problem is one object in the `PROBLEMS` array in `problems.js`. Copy
-the closest existing one and change it. The parts:
+Every problem is one object in the `PROBLEMS` array in the course's
+`problems.js` (for CE 2450, `ce-2450/problems.js`). Copy the closest existing
+one and change it. The parts:
 
 ```js
 {
   id: 'hw-3-12',                       // unique, used in the page address (#hw-3-12)
-  group: 'Mastering Engineering, Chapter 3',
+  group: 'Mastering Engineering, Chapter 3',   // sidebar heading
   title: 'Problem 3.12: ...',
   source: 'where it comes from',
   view: '3d',                          // or '2d' for a planar figure (x right, y up)

@@ -1,9 +1,9 @@
 /* ============================================================================
-   Statics in 3D  -  viewer engine
+   Coding with Koda  -  shared 3D problem viewer
    ----------------------------------------------------------------------------
-   Classic script (no imports). index.html loads three.js as an ES module and
-   calls StaticsApp.start({THREE, OrbitControls, CSS2DRenderer, CSS2DObject}).
-   Problems are described declaratively in problems.js; this file turns those
+   Classic script (no imports). Each course page loads three.js as an ES module
+   and calls StaticsApp.start({THREE, OrbitControls, CSS2DRenderer, CSS2DObject}).
+   Problems are described declaratively in each course's problems.js; this file turns those
    descriptions into a scene. You should not need to touch this file to add or
    edit a problem. See README.md for the element reference.
    ========================================================================== */
